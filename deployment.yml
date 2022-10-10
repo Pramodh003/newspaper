@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-app-container
-        image: akash300/newspaper-react:44
+        image: akash300/newspaper-react:45
         ports:
         - containerPort: 5000
 ---
