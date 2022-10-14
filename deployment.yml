@@ -18,7 +18,7 @@ spec:
       containers:
       - name: demo-react-app
         # Docker Image
-        image: akash300/news-react:9
+        image: akash300/news-react:10
         resources:
          #cpu and memory limit
           limits:
