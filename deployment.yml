@@ -1,32 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-app-deploy
+  #the Deployment Name
+  name: demo-react-app
 spec:
+  #the Number of Pods
   replicas: 2
   selector:
     matchLabels:
-      app: react-app
+      app: demo-react-app
   template:
     metadata:
       labels:
-        app: react-app
+        app: demo-react-app
     spec:
+      # Container Details
       containers:
-      - name: react-app-container
-        image: akash300/news-react:8
+      - name: demo-react-app
+        # Docker Image
+        image: akash300/news-react:1
+        resources:
+         #cpu and memory limit
+          limits:
+            memory: "550Mi"
+            cpu: "500m"
         ports:
-        - containerPort: 5000
+        #the port on which the app can be reached out inside the container
+        - containerPort: 80
+
 ---
+#service 
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-app-svc
+   #the Serivce Name- it should match with the lable name of the deployment 
+  name: demo-react-app
 spec:
+  #type of the service
   type: NodePort
-  ports:
-  - port: 80
-    targetPort: 5000
-    nodePort: 32008
   selector:
-    app: react-app
+    app: demo-react-app
+  ports:
+  - port: 3050
+    targetPort: 3000
+    protocol: TCP
+    nodePort: 31000
